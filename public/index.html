@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f6f1">
+  <meta name="description" content="Личная мастерская письменного перевода: задания, проверка и архив работ.">
+  <title>Translation Lab — твоя мастерская перевода</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-view="practice">
+        <span class="brand-mark">tl</span>
+        <span><strong>translation lab</strong><small>your translation space</small></span>
+      </a>
+      <div class="side-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+      <nav class="nav">
+        <button class="nav-item active" data-view="practice"><span>✳</span> Новая практика</button>
+        <button class="nav-item" data-view="archive"><span>▤</span> Мои работы <b id="archiveCount">0</b></button>
+        <button class="nav-item" data-view="progress"><span>↗</span> Мой прогресс</button>
+        <button class="nav-item" data-view="vocabulary"><span>✎</span> Личный словарь <b id="vocabCount">0</b></button>
+      </nav>
+      <div class="sidebar-note">
+        <span class="note-flower">✿</span>
+        <strong>Маленький совет</strong>
+        <p>Не спеши искать единственный правильный вариант. В переводе важны смысл, контекст и обоснованность решения.</p>
+      </div>
+      <div class="sidebar-bottom"><span class="online-dot"></span> Личные работы хранятся на этом устройстве</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню">☰</button>
+        <div class="breadcrumb">МОЯ МАСТЕРСКАЯ <span>/</span> <b id="crumb">НОВАЯ ПРАКТИКА</b></div>
+        <div class="top-actions"><span class="date-label" id="todayLabel"></span><span class="avatar">✿</span></div>
+      </header>
+
+      <section class="view active" id="view-practice">
+        <div class="welcome">
+          <div>
+            <div class="eyebrow"><span class="sparkle">✦</span> ТВОЁ ПРОСТРАНСТВО ДЛЯ РОСТА</div>
+            <h1>Перевод начинается<br>с <em>твоего решения.</em></h1>
+            <p class="welcome-sub">Тренируйся вдумчиво. Экспериментируй с формулировками.<br>Разбирай не только ошибки, но и удачные находки.</p>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="art-circle"></div><div class="art-paper">Aa<br><i>Ü</i></div><span class="art-star s1">✳</span><span class="art-star s2">✧</span><span class="art-leaf">〰</span></div>
+        </div>
+
+        <div class="section-heading"><div><span class="section-kicker">01 / НАСТРОЙ ЗАНЯТИЕ</span><h2>С чего начнём?</h2></div><span class="muted-small">Выбери направление и формат</span></div>
+        <div class="settings-card">
+          <div class="field-group">
+            <label for="direction">Направление перевода</label>
+            <div class="language-row">
+              <select id="sourceLang"><option value="ru">Русский</option><option value="de">Немецкий</option><option value="en">Английский</option></select>
+              <button class="swap-btn" id="swapLang" title="Поменять языки местами">⇄</button>
+              <select id="targetLang"><option value="de">Немецкий</option><option value="ru">Русский</option><option value="en">Английский</option></select>
+            </div>
+          </div>
+          <div class="field-grid">
+            <div class="field-group"><label for="level">Уровень сложности</label><select id="level"><option>A1</option><option>A2</option><option>B1</option><option selected>B2</option><option>C1</option><option>C2</option></select></div>
+            <div class="field-group"><label for="format">Формат задания</label><select id="format"><option value="одно предложение">Одно предложение</option><option value="короткий текст">Небольшой текст</option><option value="текст" selected>Полноценный текст</option><option value="аудирование">Аудирование (перевод на слух)</option><option value="свой текст">Мой собственный текст</option></select><div class="field-group audio-length-group" id="audioLengthGroup" hidden><label for="audioLength">Объём аудирования</label><select id="audioLength"><option value="one">Одно предложение</option><option value="several" selected>Несколько предложений</option></select></div></div>
+            <div class="field-group"><label for="topic">Тематика</label><select id="topic"><option>На выбор</option><option>Общество и культура</option><option>Образование и наука</option><option>Медиа и коммуникация</option><option>Работа и деловая среда</option><option>Психология и отношения</option><option>Публицистика и эссе</option><option>Искусство и литература</option></select></div>
+          </div>
+          <div class="settings-footer"><span class="hint"><span>✦</span> Для аудирования можно скрыть исходник и слушать фрагментами</span><button class="primary-btn" id="generateBtn">Создать задание <span>↗</span></button></div>
+        </div>
+
+        <div class="section-heading work-heading"><div><span class="section-kicker">02 / ТЕКУЩАЯ РАБОТА</span><h2>Переводческая мастерская</h2></div><span class="muted-small">Можно вставить собственный исходный текст</span></div>
+        <div class="work-card">
+          <div class="work-toolbar"><div class="work-title"><span class="status-dot"></span><strong>Текущая работа</strong><span class="draft-tag">ЧЕРНОВИК</span></div><button class="text-btn" id="clearBtn">Очистить поля ↺</button></div>
+          <div class="work-grid">
+            <div class="text-panel">
+              <div class="panel-head"><label for="sourceText">ИСХОДНЫЙ ТЕКСТ</label><div class="panel-tools"><button id="addWordBtn" title="Добавить выделенное слово в личный словарь">＋ В словарь</button><button id="listenBtn" title="Прослушать исходный текст">▶ Слушать</button><button id="listenChunkBtn" title="Прослушать следующий фрагмент">▸ По фрагментам</button><button id="pauseSpeechBtn" title="Пауза / продолжить">Ⅱ Пауза</button><label class="voice-control" for="speechVoice">Голос <select id="speechVoice"><option value="female">Женский</option><option value="male">Мужской</option></select></label><label class="speed-control" id="speedControl" for="speechRate">Скорость <select id="speechRate"><option value="0.7">0,7×</option><option value="0.85">0,85×</option><option value="1" selected>1×</option><option value="1.15">1,15×</option><option value="1.3">1,3×</option><option value="1.5">1,5×</option></select></label><button id="revealBtn" title="Показать исходный текст" hidden>◉ Показать текст</button></div></div>
+              <textarea id="sourceText" placeholder="Сгенерируй задание или вставь сюда свой исходный текст..."></textarea>
+              <div class="panel-foot"><span id="sourceCount">0 слов</span><span>Исходник</span></div>
+            </div>
+            <div class="text-panel answer-panel">
+              <div class="panel-head"><label for="translationText">ПЕРЕВОД</label><span class="writing-label">✎ ПИШИ СВОЙ ВАРИАНТ</span></div>
+              <textarea id="translationText" placeholder="Здесь появится перевод. Экспериментируй с формулировками..."></textarea>
+              <div class="panel-foot"><span id="translationCount">0 слов</span><span>Мой вариант</span></div>
+            </div>
+          </div>
+          <div class="review-row"><div class="review-note"><span>✦</span><span>Проверка анализирует смысл, грамматику, лексику и стиль.<br><b>Объяснения — на русском языке.</b></span></div><button class="review-btn" id="reviewBtn">Проверить перевод <span>→</span></button></div>
+          <div class="result-wrap" id="resultWrap" hidden><div class="result-head"><div><span class="section-kicker">03 / РАЗБОР РАБОТЫ</span><h3>Обратная связь</h3></div><div class="result-actions"><button class="secondary-btn" id="quickAddSelectedBtn">＋ Добавить выделенное слово в словарь</button><button class="text-btn" id="saveBtn">Сохранить в мои работы ↓</button></div></div><div class="result-content" id="resultContent"></div></div>
+        </div>
+        <div class="bottom-tip"><span>✿</span><p><b>Помни:</b> хороший перевод — не обязательно буквальный. Главное, чтобы решение было точным, естественным и оправданным контекстом.</p></div>
+      </section>
+
+      <section class="view" id="view-archive">
+        <div class="page-intro"><div class="eyebrow">ИСТОРИЯ РАБОТ</div><h1>Мои <em>работы.</em></h1><p>Все сохранённые переводы, разборы и заметки — в одном месте.</p></div>
+        <div class="archive-toolbar"><input id="archiveSearch" type="search" placeholder="Найти работу по тексту или языку..."><button class="secondary-btn" id="exportAllBtn">Экспортировать архив ↓</button></div>
+        <div id="archiveList" class="archive-list"></div>
+      </section>
+
+      <section class="view" id="view-progress">
+        <div class="page-intro"><div class="eyebrow">ТВОЙ ПРОГРЕСС</div><h1>Мой <em>прогресс.</em></h1><p>Здесь видно, как растёт опыт и становятся увереннее переводческие решения.</p></div>
+        <div class="stats-grid"><div class="stat-card"><span>СОХРАНЕНО РАБОТ</span><strong id="statWorks">0</strong><small>в личном архиве</small></div><div class="stat-card"><span>ЯЗЫКОВЫХ ПАР</span><strong id="statPairs">0</strong><small>практика выполнена</small></div><div class="stat-card"><span>СЛОВ ПЕРЕВЕДЕНО</span><strong id="statWords">0</strong><small>в сохранённых работах</small></div></div>
+        <div class="progress-note"><span>✿</span><div><b>Последовательность важнее идеальности.</b><p>Возвращайся к сохранённым разборам, пересматривай спорные решения и отмечай повторяющиеся ошибки.</p></div></div>
+      </section>
+
+
+      <section class="view" id="view-vocabulary">
+        <div class="page-intro"><div class="eyebrow">АКТИВНЫЙ СЛОВАРНЫЙ ЗАПАС</div><h1>Личный <em>словарь.</em></h1><p>Сохраняй незнакомые слова, возвращайся к ним и постепенно переводи их в активный запас.</p></div>
+        <div class="vocab-summary">
+          <div><strong id="vocabTotal">0</strong><span>слов в словаре</span></div>
+          <div><strong id="vocabDue">0</strong><span>нужно повторить</span></div>
+          <button class="primary-btn" id="addVocabManual">＋ Добавить слово</button>
+        </div>
+        <div class="vocab-toolbar"><input id="vocabSearch" type="search" placeholder="Найти слово или перевод..."><select id="vocabFilter"><option value="all">Все слова</option><option value="learning">Изучаю</option><option value="hard">Сложные</option><option value="known">Уже знаю</option></select></div>
+        <div id="vocabList" class="vocab-list"></div>
+        <div class="vocab-tip"><b>Как это работает</b><p>Слова со статусами «Изучаю» и «Сложные» можно учитывать при создании новых заданий, если они подходят по языку и контексту.</p></div>
+      </section>
+      <footer class="footer"><span>translation lab <i>✿</i></span><span>Сделано для вдумчивой практики перевода</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="vocabModal" hidden>
+    <form class="vocab-modal" id="vocabForm">
+      <div class="modal-head"><div><span class="eyebrow">ЛИЧНЫЙ СЛОВАРЬ</span><h2 id="vocabModalTitle">Новое слово</h2></div><button type="button" class="modal-close" id="closeVocabModal" aria-label="Закрыть">×</button></div>
+      <label>Слово или выражение<input id="vocabTerm" required maxlength="120" placeholder="Например, sich etwas vornehmen"></label>
+      <div class="vocab-form-grid">
+        <label>Язык слова<select id="vocabLang"><option value="de">Немецкий</option><option value="en">Английский</option><option value="ru">Русский</option></select></label>
+        <label>Перевод<input id="vocabMeaning" maxlength="240" placeholder="Значение на русском"></label>
+      </div>
+      <label>Пример или контекст<textarea id="vocabExample" rows="2" placeholder="Предложение, в котором встретилось слово"></textarea></label>
+      <label>Моя заметка<input id="vocabNote" maxlength="240" placeholder="Управление, оттенок значения, ассоциация…"></label>
+      <label>Статус<select id="vocabStatus"><option value="learning">Изучаю</option><option value="hard">Сложное — повторять чаще</option><option value="known">Уже знаю</option></select></label>
+      <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelVocab">Отмена</button><button type="submit" class="primary-btn">Сохранить слово</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
